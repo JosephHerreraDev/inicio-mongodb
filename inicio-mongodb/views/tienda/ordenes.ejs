@@ -1,0 +1,25 @@
+<%- include('../includes/encabezado.ejs') %>
+    <link rel="stylesheet" href="/css/ordenes.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navegacion.ejs') %>
+        <main>
+            <% if (ordenes.length <= 0) { %>
+                <h1>No hay nada!</h1>
+            <% } else { %>
+                <ul class="orders">
+                    <% ordenes.forEach(orden => { %>
+                        <li class="orders__item">
+                            <h1>Orden - # <%= orden.id %></h1>
+                            <ul class="orders__products">
+                                <% orden.productos.forEach(producto => { %>
+                                    <li class="orders__products-item"><%= producto.titulo %> (<%= producto.articuloOrden.cantidad %>)</li>
+                                <% }); %>
+                            </ul>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </main>
+        <%- include('../includes/pie.ejs') %>

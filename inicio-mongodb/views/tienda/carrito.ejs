@@ -1,0 +1,23 @@
+<%- include('../includes/encabezado.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navegacion.ejs') %>
+    <main>
+        <% if (productos.length > 0) { %>
+            <ul class="carrito__item-list">
+                <% productos.forEach(p => { %>
+                <li class="carrito__item"> 
+                    <h1><%= p.datosProducto.titulo %></h1>
+                    <h2>Cantidad: <%= p.cant %></h2>
+                    <form action="/eliminar-articulo-carrito" method="POST">
+                        <input type="hidden" value="<%= p.datosProducto.id %>" name="idProducto">
+                        <button class="btn danger" type="submit">Eliminar</button>
+                    </form>
+                </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <h1> No hay Productos en el Carrito</h1>
+        <% } %>
+    </main>
+    <%- include('../includes/pie.ejs') %>
