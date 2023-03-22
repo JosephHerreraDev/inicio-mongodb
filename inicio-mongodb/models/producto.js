@@ -1,3 +1,4 @@
+const getBD = require('../util/database').getDb;
 const Sequelize = require('sequelize');
 
 const sequelize = require('../util/basedatos');

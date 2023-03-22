@@ -30,8 +30,7 @@ app.use((req, res, next) => {
 
 app.use(controladorError.get404);
 
-conectarMongo(cliente => {
-  console.log('Conectado!');
+conectarMongo(() => {
   app.listen(3000);
 });
 
