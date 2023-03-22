@@ -21,6 +21,7 @@
                         <p class="producto__descripcion"><%= producto.descripcion %></p>
                     </div>
                     <div class="card_actions">
+                        <a href="/productos/<%= producto._id %>" class="btn">Detalles</a>
                         <%- include ('../includes/agregar-al-carrito.ejs', {producto: producto}) %>
                     </div>
                 </article>

@@ -19,7 +19,7 @@ exports.getProducto = (req, res, next) => {
   Producto.encontrarPorId(idProd)
   .then(producto => {
       res.render('tienda/detalle-producto', {
-        producto: producto[0],
+        producto: producto,
         tituloPagina: producto.titulo,
         ruta: "/productos"
       });   
