@@ -13,20 +13,15 @@ exports.postAgregarProducto = (req, res, next) => {
   const urlImagen = req.body.urlImagen;
   const precio = req.body.precio;
   const desc = req.body.descripcion;
-  req.usuario
-  .crearProducto ({
-    titulo:titulo,
-    precio:precio,
-    urlImagen: urlImagen,
-    descripcion: descripcion
-  })
+  const producto = new Producto(titulo, precio, desc, urlImagen);
+  producto.guardar()
   .then (resultado => {
     console.log("Producto Creado");
-    res.redirect('/admin/productos')
+    res.redirect('/admin/productos');
   })
   .catch(err => {
     console.log(err);
-  });   
+  });
 };
 
 // exports.getEditarProducto = (req, res, next) => {

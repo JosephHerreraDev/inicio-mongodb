@@ -9,7 +9,8 @@ class Producto{
   }
   guardar(){
     const db = getBD();
-    db.collection('productos').insertOne(this)
+    return db.collection('productos')
+    .insertOne(this)
     .then(resultado => {
       console.log(resultado);
     })
