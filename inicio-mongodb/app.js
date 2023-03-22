@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const controladorError = require('./controllers/error');
-const conectarMongo = require('./util/basedatos');
+const conectarMongo = require('./util/basedatos').conectarMongo;
 // const Usuario = require('./models/usuario');
 
 const app = express();
@@ -23,6 +23,7 @@ app.use((req, res, next) => {
     //     next();
     //   })
     //   .catch(err => console.log(err));
+    next();
   });
 
 // app.use('/admin', adminRoutes);
