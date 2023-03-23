@@ -69,18 +69,17 @@ exports.postAgregarProducto = (req, res, next) => {
 //     .catch(err => console.log(err));
 // };
 
-// exports.getProductos = (req, res, next) => {
-//   req.usuario
-//     .getProductos()
-//     .then(productos => {
-//       res.render('admin/productos', {
-//         prods: productos,
-//         tituloPagina: 'Administrar Productos',
-//         ruta: '/admin/productos'
-//       });
-//     })
-//     .catch(err => console.log(err));
-// };
+exports.getProductos = (req, res, next) => {
+    Producto.mostrarTodo()
+    .then(productos => {
+      res.render('admin/productos', {
+        prods: productos,
+        tituloPagina: 'Administrar Productos',
+        ruta: '/admin/productos'
+      });
+    })
+    .catch(err => console.log(err));
+};
 
 // exports.postBorrarProducto = (req, res, next) => {
 //   const idProd = req.body.idProducto;
