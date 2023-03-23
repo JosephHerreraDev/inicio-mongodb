@@ -2,16 +2,26 @@ const mongodb = require('mongodb');
 const getBD = require('../util/basedatos').getBD;
 
 class Producto{
-  constructor(titulo, precio, descripcion, urlImagen){
+  constructor(titulo, precio, descripcion, urlImagen, id){
     this.titulo = titulo;
     this.precio = precio;
     this.descripcion = descripcion;
     this.urlImagen = urlImagen;
+    this._id = id ? new mongodb.ObjectId(id) : null;
   }
   guardar(){
     const db = getBD();
-    return db.collection('productos')
-    .insertOne(this)
+    let dbOp;
+    if(this._id){
+      dbOp = bd
+      .collection('productos')
+      .updateOne({_id: this._id}, {$set: this});
+    } else {
+      dbOp = db
+      .collection('productos')
+      .insertOne(this);
+    }
+    return dbOp
     .then(resultado => {
       console.log(resultado);
     })
