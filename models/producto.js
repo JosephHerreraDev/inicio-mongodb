@@ -44,7 +44,6 @@ class Producto{
       console.log(err);
     });
   }
-
   static encontrarPorId(idProd){
     const db = getBD();
     return db
@@ -54,6 +53,18 @@ class Producto{
     .then(producto => {
       console.log(producto);
       return producto;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+  static eliminarPorId(idProd){
+    const db = getBD();
+    return db
+    .collection('productos')
+    .deleteOne({_id: new mongodb.ObjectId(idProd)})
+    .then(result => {
+      console.log('Producto eliminado');
     })
     .catch(err => {
       console.log(err);

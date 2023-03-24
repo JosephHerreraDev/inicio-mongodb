@@ -81,15 +81,11 @@ exports.getProductos = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-// exports.postBorrarProducto = (req, res, next) => {
-//   const idProd = req.body.idProducto;
-//   Producto.borrarPorId(idProd)
-//     .then(producto => {
-//       return producto.destroy();
-//     })
-//     .then(resultado => {
-//       console.log('PRODUCTO DESTRUIDO');
-//       res.redirect('/admin/productos');
-//     })
-//     .catch(err => console.log(err));
-// };
+exports.postBorrarProducto = (req, res, next) => {
+  const idProd = req.body.idProducto;
+  Producto.borrarPorId(idProd)
+  .then(() => {
+    console.log('PRODUCTO ELIMINADO');
+    res.redirect('/admin/productos');
+  })
+};
