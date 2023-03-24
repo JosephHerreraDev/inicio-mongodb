@@ -19,7 +19,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   Usuario.encontarPorId('604baee8ca5e35d5ba709c6b')
     .then(usuario => {
-      req.usuario = usuario;
+      req.usuario = new Usuario(
+        usuario.nombre,
+        usuario.email,
+        usuario.carrito,
+        usuario._id
+      );
       next();
     })
     .catch(err => console.log(err));

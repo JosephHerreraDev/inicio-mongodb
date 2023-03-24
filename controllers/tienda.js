@@ -61,36 +61,14 @@ exports.getCarrito = (req, res, next) => {
 
 exports.postCarrito = (req, res, next) => {
   const idProd = req.body.idProducto;
-  let obtenerCarrito;
-  let nuevaCantidad = 1;
-  req.usuario
-    .getCarrito()
-    .then(carrito => {
-      obtenerCarrito = carrito;
-      return carrito.getProductos({ where: { id: idProd } });
-    })
-    .then(productos => {
-      let producto;
-      if (productos.length > 0) {
-        producto = productos[0];
-      }
-
-      if (producto) {
-        const cantidadAnterior = producto.articuloCarrito.cantidad;
-        cantidadNueva = cantidadAnterior + 1;
-        return producto;
-      }
-      return Producto.encontrarPorId(idProd);
-    })
+  Producto.encontrarPorId(idProd)
     .then(producto => {
-      return obtenerCarrito.agregarProducto(producto, {
-        through: { cantidad: cantidadNueva }
-      });
+      return req.usuario.agregarACarrito(producto);
     })
-    .then(() => {
+    .then(resultado => {
+      console.log(resultado);
       res.redirect('/carrito');
-    })
-    .catch(err => console.log(err));
+    });
 };
 
 exports.postBorrarArticuloCarrito = (req, res, next) => {
