@@ -13,7 +13,7 @@ exports.postAgregarProducto = (req, res, next) => {
   const urlImagen = req.body.urlImagen;
   const precio = req.body.precio;
   const desc = req.body.descripcion;
-  const producto = new Producto(titulo, precio, desc, urlImagen);
+  const producto = new Producto(titulo, precio, desc, urlImagen, null, req.usuario._id);
   producto.guardar()
   .then (resultado => {
     console.log("Producto Creado");

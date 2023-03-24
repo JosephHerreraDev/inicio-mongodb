@@ -2,12 +2,13 @@ const mongodb = require('mongodb');
 const getBD = require('../util/basedatos').getBD;
 
 class Producto{
-  constructor(titulo, precio, descripcion, urlImagen, id){
+  constructor(titulo, precio, descripcion, urlImagen, id, idUsuario){
     this.titulo = titulo;
     this.precio = precio;
     this.descripcion = descripcion;
     this.urlImagen = urlImagen;
     this._id = id ? new mongodb.ObjectId(id) : null;
+    this.idUsuario = idUsuario;
   }
   guardar(){
     const db = getBD();
