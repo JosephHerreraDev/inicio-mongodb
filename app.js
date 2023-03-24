@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 
 const controladorError = require('./controllers/error');
 const rutasTienda = require('./routes/tienda');
+const adminRoutes = require('./routes/admin');
 const conectarMongo = require('./util/basedatos').conectarMongo;
+const Usuario = require('./models/usuario');
 
 const app = express();
 
@@ -14,17 +16,18 @@ app.set('views','views');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(rutasTienda);
-
 app.use((req, res, next) => {
-    // Usuario.encontarPorId(1)
-    //   .then(usuario => {
-    //     req.usuario = usuario;
-    //     next();
-    //   })
-    //   .catch(err => console.log(err));
-    next();
-  });
+  Usuario.encontarPorId('604baee8ca5e35d5ba709c6b')
+    .then(usuario => {
+      req.usuario = usuario;
+      next();
+    })
+    .catch(err => console.log(err));
+});
+
+app.use('/admin', adminRoutes);
+
+app.use(rutasTienda);
 
 // app.use('/admin', adminRoutes);
 // app.use(tiendaRoutes);

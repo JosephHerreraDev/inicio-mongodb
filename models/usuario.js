@@ -1,16 +1,29 @@
-const Sequelize = require('sequelize');
+const mongodb = require('mongodb');
+const getBD = require('../util/basedatos').getBD;
 
-const sequelize = require('../util/basedatos');
+const ObjectId = mongodb.ObjectId;
 
-const Usuario = sequelize.define('usuario', {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true
-  },
-  nombre: Sequelize.STRING,
-  email: Sequelize.STRING
-});
-
+class Usuario {
+  constructor(nombreusuario,email) {
+    this.nombre = nombreusuario;
+    this.email = email;
+  }
+  guardar() {
+    const bd = getBD();
+    return bd.collection('usuarios').insertOne(this);
+  }
+  static encontrarById(idUsuario) {
+    const bd = getBD();
+    return bd
+      .collection('usuarios')
+      .findOne({ _id: new ObjectId(idUsuario) })
+      .then(usuario => {
+        console.log(usuario);
+        return usuario;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+}
 module.exports = Usuario;
