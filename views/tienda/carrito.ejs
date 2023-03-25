@@ -7,10 +7,10 @@
             <ul class="carrito__item-list">
                 <% productos.forEach(p => { %>
                 <li class="carrito__item"> 
-                    <h1><%= p.datosProducto.titulo %></h1>
-                    <h2>Cantidad: <%= p.cant %></h2>
+                    <h1><%= p.titulo %></h1>
+                    <h2>Cantidad: <%= p.cantidad %></h2>
                     <form action="/eliminar-articulo-carrito" method="POST">
-                        <input type="hidden" value="<%= p.datosProducto.id %>" name="idProducto">
+                        <input type="hidden" value="<%= p._id %>" name="idProducto">
                         <button class="btn danger" type="submit">Eliminar</button>
                     </form>
                 </li>

@@ -71,6 +71,26 @@ class Producto{
       console.log(err);
     });
   }
+  getcarrito(){
+    const db = getBD();
+    const idsProducto = this.carrito.articulos.map(a => {
+      return a.idProducto;
+    })
+    return db
+    .collection('productos')
+    .find({_id: {$in: idsProducto}})
+    .toArray()
+    .then(productos => {
+      return productos.map(p => {
+        return {
+          ...p, 
+          cantidad: this.carrito.articulos.find(a => {
+          return a.idProducto.toString() === p._id.toString();
+        }).cantidad
+      };
+      });
+    });
+  }
 }
 
 module.exports = Producto;
